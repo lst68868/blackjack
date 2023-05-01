@@ -19,7 +19,6 @@ let dealer = {
 // Initial hands dealt
 
 
-
 document.getElementById("player").innerHTML = "";
 document.getElementById("dealer").innerHTML = "Welcome to the table. Click to deal!";
 
@@ -58,7 +57,7 @@ function reset() {
     deck = new Deck();
     // deal();
     document.getElementById("player").innerHTML = ("Click to deal!");
-    document.getElementById("dealer").innerHTML = ("Ready when you are ;)");
+    document.getElementById("dealer").innerHTML = ("New game. Deck is re-shuffled. Ready when you are ;)");
     document.getElementById("win-status").innerHTML = ("");
 }
 
@@ -72,10 +71,12 @@ function deal() {
     player.hand.push(deck.dealCard());
     player.hand.push(deck.dealCard());
 
+
     dealer.hand.push(deck.dealCard());
     dealer.hand.push(deck.dealCard());
     calculateHand(player);
     calculateHand(dealer);
+
 
     document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
     document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);

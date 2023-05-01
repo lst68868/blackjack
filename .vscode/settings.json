@@ -1,0 +1,6 @@
+{
+    "javascript.validate.enable": true,
+    "workbench.colorCustomizations": {
+      "editorUnnecessaryCode.border": "#ff0000"
+    },
+}
