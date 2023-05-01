@@ -17,10 +17,11 @@ let dealer = {
 }
 
 // Initial hands dealt
-deal();
 
-document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
-document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+
+
+document.getElementById("player").innerHTML = "New game. Click to deal.";
+document.getElementById("dealer").innerHTML = "Ready when you are ;)";
 
 // Our buttons
 let hitButton = document.getElementById("hit");
@@ -61,7 +62,7 @@ function reset() {
 }
 
 function deal() {
-    
+
     player.hand = [];
     dealer.hand = [];
     player.handtotal = 0;
@@ -122,9 +123,9 @@ function stand() {
 
 
 function whoWins() {
-    if(player.handtotal === 21) {
+    if(player.hand.length === 2 && player.handtotal === 21) {
         document.getElementById("win-status").innerHTML = ("Blackjack! Deal again.");
-    } else if (dealer.handtotal === 21)  {
+    } else if (player.hand.length === 2 && dealer.handtotal === 21)  {
             document.getElementById("win-status").innerHTML = ("Dealer has blackjack. You lose :( Deal again.");
     }
     else{
