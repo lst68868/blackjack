@@ -57,6 +57,7 @@ function reset() {
     // deal();
     document.getElementById("player").innerHTML = ("Click to deal!");
     document.getElementById("dealer").innerHTML = ("Ready when you are ;)");
+    document.getElementById("win-status").innerHTML = ("");
 }
 
 function deal() {
@@ -120,14 +121,19 @@ function stand() {
 
 function whoWins() {
     if (player.handtotal > 21) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal + "\n" + "You lose!");
+        document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
+        document.getElementById("win-status").innerHTML = ("You lose!");
     } else if (dealer.handtotal > 21) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal + "\n" + "You win!");
+        document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
+        document.getElementById("win-status").innerHTML = ("You win!");
     } else if (player.handtotal > dealer.handtotal) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal + "\n" + "You win!");
+        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+        document.getElementById("win-status").innerHTML = ("You win!");
     } else if (player.handtotal < dealer.handtotal) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal + "\n" + "You lose!");
+        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+        document.getElementById("win-status").innerHTML = ("You lose!");
     } else {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal + "\n" + "Push!");
+        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+        document.getElementById("win-status").innerHTML = ("Push!");
     }
 }
