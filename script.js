@@ -1,32 +1,63 @@
-class Deck {
-    constructor() {
-        this.deck = ['2D', '2S', '2H', '2C', '3D', '3S', '3H', '3C', '4D', '4S', '4H', '4C', '5D', '5S', '5H', '5C', '6D', '6S', '6H', '6C', '7D', '7S', '7H', '7C', '8D', '8S', '8H', '8C', '9D', '9S', '9H', '9C', '10D', '10S', '10H', '10C', 'JD', 'JS', 'JH', 'JC', 'QD', 'QS', 'QH', 'QC', 'KD', 'KS', 'KH', 'KC', 'AD', 'AS', 'AH', 'AC']
-    }
-    getDeck(){
-        return console.log(this.deck);
-    }
-    dealCard(){
-        let randomNum = Math.floor(Math.random() * this.deck.length);
-        let pickedCard = this.deck[randomNum];
-        this.removeCard(pickedCard);
-        return pickedCard;
-    }
-    removeCard(pickedCard){
-        let indexOfCard = this.deck.indexOf(pickedCard);
-        if(indexOfCard < 0){
-            return console.error("indexOfCard === -1");
-        }
-        this.deck.splice(indexOfCard, 1);
-    }
+import Deck  from './Models/Deck.js';
+import  Player  from './Models/Player.js';
+
+let deck = new Deck();
+let finances = new Player(100, 1000, 10000);
+
+let player = {
+    bankroll: finances.bankroll,
+    hand: [],
+    bet: 0,
+    handtotal: 0
 }
 
+let dealer = {
+    hand: [],
+    handtotal: 0
+}
 
-///before each game...
-let deck = new Deck();
-//then...
-console.log(deck);
-console.log("Slowly shuffled by hand by a grumpy asian lady and/or jewish man")
-deck.dealCard();
-deck.getDeck();
+player.hand.push(deck.dealCard());
+player.hand.push(deck.dealCard());
+player.hand.push(deck.dealCard());
+dealer.hand.push(deck.dealCard());
+dealer.hand.push(deck.dealCard());
+calculateHand(player)
+calculateHand(dealer)
 
 
+
+console.log(player , dealer);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function calculateHand(player){
+
+    for(let i = 0; i < player.hand.length; i++){
+        let value = player.hand[i][0];
+        if(value === "J" || value === "Q" || value === "K"){
+            player.handtotal += 10;
+        } else if(value === "A"){
+            if( (player.handtotal + 11) > 21){
+                console.log("A should be 1");
+                player.handtotal += 1;
+            } else {
+                player.handtotal += 11;
+            }
+        } else {
+            player.handtotal += parseInt(value);
+        }
+    }
+    return player.handtotal;
+}
