@@ -61,6 +61,7 @@ function reset() {
 }
 
 function deal() {
+    
     player.hand = [];
     dealer.hand = [];
     player.handtotal = 0;
@@ -121,20 +122,27 @@ function stand() {
 
 
 function whoWins() {
-    if (player.handtotal > 21) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
-        document.getElementById("win-status").innerHTML = ("You lose!");
-    } else if (dealer.handtotal > 21) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
-        document.getElementById("win-status").innerHTML = ("You win!");
-    } else if (player.handtotal > dealer.handtotal) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
-        document.getElementById("win-status").innerHTML = ("You win!");
-    } else if (player.handtotal < dealer.handtotal) {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
-        document.getElementById("win-status").innerHTML = ("You lose!");
-    } else {
-        document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
-        document.getElementById("win-status").innerHTML = ("Push!");
+    if(player.handtotal === 21) {
+        document.getElementById("win-status").innerHTML = ("Blackjack! Deal again.");
+    } else if (dealer.handtotal === 21)  {
+            document.getElementById("win-status").innerHTML = ("Dealer has blackjack. You lose :( Deal again.");
+    }
+    else{
+        if (player.handtotal > 21) {
+            document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
+            document.getElementById("win-status").innerHTML = ("You lose!");
+        } else if (dealer.handtotal > 21) {
+            document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
+            document.getElementById("win-status").innerHTML = ("You win!");
+        } else if (player.handtotal > dealer.handtotal) {
+            document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+            document.getElementById("win-status").innerHTML = ("You win!");
+        } else if (player.handtotal < dealer.handtotal) {
+            document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+            document.getElementById("win-status").innerHTML = ("You lose!");
+        } else {
+            document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+            document.getElementById("win-status").innerHTML = ("Push!");
+        }
     }
 }
