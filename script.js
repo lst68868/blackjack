@@ -76,6 +76,7 @@ function deal() {
 
     document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
     document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
+    document.getElementById("win-status").innerHTML = ("");
 }
 
 function calculateHand(player) {
@@ -107,7 +108,7 @@ function hit(player) {
         document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
     }
 
-    whoWins();
+    // whoWins();
 }
 
 function stand() {
