@@ -20,8 +20,8 @@ let dealer = {
 
 
 
-document.getElementById("player").innerHTML = "New game. Click to deal.";
-document.getElementById("dealer").innerHTML = "Ready when you are ;)";
+document.getElementById("player").innerHTML = "";
+document.getElementById("dealer").innerHTML = "Welcome to the table. Click to deal!";
 
 // Our buttons
 let hitButton = document.getElementById("hit");
@@ -31,9 +31,9 @@ let resetButton = document.getElementById("reset");
 
 hitButton.addEventListener("click", function () {
     hit(player);
-    if (player.handtotal > 21) {
-        alert("You busted! Deal again.");
-    }
+    // if (player.handtotal > 21) {
+    //     alert("You busted! Deal again.");
+    // }
 });
 
 standButton.addEventListener("click", function () {
@@ -41,6 +41,7 @@ standButton.addEventListener("click", function () {
 });
 
 dealButton.addEventListener("click", function () {
+    whoWins();
     deal();
 });
 
@@ -105,7 +106,7 @@ function hit(player) {
     calculateHand(player);
 
     if (player.handtotal > 21) {
-        document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal + "\n" + "Bust!");
+        document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal + "\n" + "Bust! Click to deal next hand.");
     } else {
         document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
     }
