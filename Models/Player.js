@@ -9,7 +9,7 @@ export default class Player {
     }
     subtractFromBankroll(amountToSubtract){
         if(this.bankroll - amountToSubtract === 0){
-            this.bankroll === 0;
+            this.bankroll = 0;
         }else{
             return this.bankroll -= amountToSubtract;
         }

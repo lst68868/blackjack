@@ -24,6 +24,7 @@
     padding: 25px;
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 
   #win-status {
@@ -52,6 +53,29 @@
   }
 
   
-  #buttons {
-    height: 50px;
-  }
+#buttons > button {
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    padding: 10px 24px;
+}
+
+buttons:hover {
+  background-color: #2ecc71;
+}
+
+#card-back {
+  width: 70px;
+  height: 100px;
+  background-image: url("card_back.png");
+  background-size: cover;
+}
+
+.hidden {
+  display: none;
+}

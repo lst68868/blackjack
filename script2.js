@@ -48,7 +48,7 @@ function reset() {
     document.getElementById("dealer").innerHTML = ("New game. Deck is re-shuffled. Ready when you are ;)");
     document.getElementById("win-status").innerHTML = ("");
     document.getElementById("wallet").innerText = `Bankroll: ${player.bankroll}`;
-    document.getElementById("bet").innerHTML = `Your bet: ${prompt("What is your bet?")}`;
+    document.getElementById("betAmount").innerHTML = `Your bet: ${prompt("How much would you like to bet?")}`;
 }
 
 function bet() {
