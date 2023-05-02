@@ -52,6 +52,10 @@ function reset() {
 }
 
 function bet() {
+    document.getElementById("bankroll").innerText = `Bankroll: ${finances.bankroll}`;
+    let bet = parseInt(prompt("How much would you like to bet?"));
+    document.getElementById("betAmount").innerText = `Your bet: ${finances.bet}`;
+    
     let betAmount = parseInt(prompt("How much would you like to bet?"));
     if (betAmount > player.bankroll) {
         alert("You don't have that much money!");
@@ -62,12 +66,13 @@ function bet() {
     } else {
         player.bet = betAmount;
         player.bankroll -= betAmount;
-        document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
-        document.getElementById("betAmount").innerHTML = `Your bet: ${player.bet}`;
+        document.getElementById("bankroll").innerText = `Bankroll: ${finances.bankroll}`;
+        document.getElementById("betAmount").innerText = `Your bet: ${finances.bet}`;
     }
 }
 
 function deal() {
+    bet();
     player.hand = [];
     dealer.hand = [];
     player.handtotal = 0;
@@ -79,10 +84,11 @@ function deal() {
     dealer.hand.push(deck.dealCard());
     calculateHand(player);
     calculateHand(dealer);
-
-    document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
-    document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
-    document.getElementById("win-status").innerHTML = ("");
+    
+    document.getElementById("player-cards").innerHTML = player.hand.join(', ');
+    document.getElementById("player-score").innerHTML = player.handtotal;
+    document.getElementById("dealer-cards").innerHTML = dealer.hand.join(', ');
+    document.getElementById("dealer-score").innerHTML = dealer.handtotal;
 }
 
 function calculateHand(player) {
@@ -109,11 +115,14 @@ function hit(player) {
     calculateHand(player);
 
     if (player.handtotal > 21) {
-        document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal + "\n" + "Bust! Click to deal next hand.");
+        document.getElementById("player-cards").innerHTML = player.hand.join(', ');
+        document.getElementById("player-score").innerHTML = player.handtotal + " Bust! Click to deal next hand.";
     } else {
-        document.getElementById("player").innerHTML = (player.hand + "\n" + player.handtotal);
+        document.getElementById("player-cards").innerHTML = player.hand.join(', ');
+        document.getElementById("player-score").innerHTML = player.handtotal;
     }
 }
+
 
 function stand() {
     while (dealer.handtotal < 17) {
