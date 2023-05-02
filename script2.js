@@ -48,31 +48,30 @@ function reset() {
     document.getElementById("dealer").innerHTML = ("New game. Deck is re-shuffled. Ready when you are ;)");
     document.getElementById("win-status").innerHTML = ("");
     document.getElementById("wallet").innerText = `Bankroll: ${player.bankroll}`;
-    document.getElementById("betAmount").innerHTML = `Your bet: ${prompt("What is your bet?")}`;
+    document.getElementById("bet").innerHTML = `Your bet: ${prompt("What is your bet?")}`;
 }
 
 function bet() {
-    document.getElementById("bankroll").innerText = `Bankroll: ${finances.bankroll}`;
-    let bet = parseInt(prompt("How much would you like to bet?"));
-    document.getElementById("betAmount").innerText = `Your bet: ${finances.bet}`;
-    
-    let betAmount = parseInt(prompt("How much would you like to bet?"));
-    if (betAmount > player.bankroll) {
-        alert("You don't have that much money!");
-        bet();
-    } else if (betAmount < 1) {
-        alert("You must bet at least $1!");
-        bet();
-    } else {
-        player.bet = betAmount;
-        player.bankroll -= betAmount;
-        document.getElementById("bankroll").innerText = `Bankroll: ${finances.bankroll}`;
-        document.getElementById("betAmount").innerText = `Your bet: ${finances.bet}`;
-    }
+    let bet = 0;
+    do {
+        document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
+        bet = parseInt(prompt("How much would you like to bet?"));
+        
+        if (bet > player.bankroll) {
+            alert("You don't have that much money!");
+        } else if (bet < 1) {
+            alert("You must bet at least $1!");
+        } else {
+            player.bet = bet;
+            player.bankroll -= bet;
+            document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
+            document.getElementById("betAmount").innerText = `Your bet: ${player.bet}`;
+        }
+    } while (bet > player.bankroll || bet < 1);
 }
 
+
 function deal() {
-    bet();
     player.hand = [];
     dealer.hand = [];
     player.handtotal = 0;

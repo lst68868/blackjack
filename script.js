@@ -71,7 +71,6 @@ function reset() {
 
 
 function deal() {
-    bet();
     player.hand = [];
     dealer.hand = [];
     player.handtotal = 0;
@@ -167,24 +166,23 @@ function whoWins() {
     }
 }
 
-function bet(){
-
-    document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
-
-    let bet = parseInt(prompt("How much would you like to bet?"));
-
-    document.getElementById("betAmount").innerHTML = `Your bet: ${player.bet}`;
-
-    if(bet>player.bankroll){
-        alert("You don't have that much money!");
-        startingBet();
-    } else if(bet<1){
-        alert("You must bet at least $1!");
-        startingBet();
-    }else{
+function bet() {
+    let bet = 0;
+    do {
         document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
-        document.getElementById("betAmount").innerHTML = `Your bet: ${player.bet}`;
-    }
+        bet = parseInt(prompt("How much would you like to bet?"));
+        
+        if (bet > player.bankroll) {
+            alert("You don't have that much money!");
+        } else if (bet < 1) {
+            alert("You must bet at least $1!");
+        } else {
+            player.bet = bet;
+            player.bankroll -= bet;
+            document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
+            document.getElementById("betAmount").innerText = `Your bet: ${player.bet}`;
+        }
+    } while (bet > player.bankroll || bet < 1);
 }
 
 
