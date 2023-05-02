@@ -28,6 +28,9 @@ let standButton = document.getElementById("stand");
 let dealButton = document.getElementById("deal");
 let resetButton = document.getElementById("reset");
 
+//Our bankroll and betting values:
+
+
 hitButton.addEventListener("click", function () {
     hit(player);
     // if (player.handtotal > 21) {
@@ -59,14 +62,21 @@ function reset() {
     document.getElementById("player").innerHTML = ("Click to deal!");
     document.getElementById("dealer").innerHTML = ("New game. Deck is re-shuffled. Ready when you are ;)");
     document.getElementById("win-status").innerHTML = ("");
+    document.getElementById("wallet").innerText = `Bankroll: ${player.bankroll}`;
+    document.getElementById("betAmount").innerHTML = `Your bet: ${prompt("What is your bet?")}`;
 }
 
-function deal() {
+//make a function to handle betting
 
+
+
+function deal() {
+    bet();
     player.hand = [];
     dealer.hand = [];
     player.handtotal = 0;
     dealer.handtotal = 0;
+
 
     player.hand.push(deck.dealCard());
     player.hand.push(deck.dealCard());
@@ -127,25 +137,80 @@ function stand() {
 function whoWins() {
     if(player.hand.length === 2 && player.handtotal === 21) {
         document.getElementById("win-status").innerHTML = ("Blackjack! Deal again.");
-    } else if (player.hand.length === 2 && dealer.handtotal === 21)  {
+        player.bankroll += (player.bet*2);
+    } else if (dealer.hand.length === 2 && dealer.handtotal === 21)  {
             document.getElementById("win-status").innerHTML = ("Dealer has blackjack. You lose :( Deal again.");
+            player.bankroll -= player.bet;
     }
     else{
         if (player.handtotal > 21) {
             document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
             document.getElementById("win-status").innerHTML = ("You lose!");
+            player.bankroll -= player.bet;
+
         } else if (dealer.handtotal > 21) {
             document.getElementById("dealer").innerHTML = (dealer.hand + dealer.handtotal);
             document.getElementById("win-status").innerHTML = ("You win!");
+            player.bankroll += (player.bet*2);
         } else if (player.handtotal > dealer.handtotal) {
             document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
             document.getElementById("win-status").innerHTML = ("You win!");
+            player.bankroll += (player.bet*2);
         } else if (player.handtotal < dealer.handtotal) {
             document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
             document.getElementById("win-status").innerHTML = ("You lose!");
+            player.bankroll -= player.bet;
         } else {
             document.getElementById("dealer").innerHTML = (dealer.hand + "\n" + dealer.handtotal);
             document.getElementById("win-status").innerHTML = ("Push!");
         }
     }
 }
+
+function bet(){
+
+    document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
+
+    let bet = parseInt(prompt("How much would you like to bet?"));
+
+    document.getElementById("betAmount").innerHTML = `Your bet: ${player.bet}`;
+
+    if(bet>player.bankroll){
+        alert("You don't have that much money!");
+        startingBet();
+    } else if(bet<1){
+        alert("You must bet at least $1!");
+        startingBet();
+    }else{
+        document.getElementById("bankroll").innerText = `Bankroll: ${player.bankroll}`;
+        document.getElementById("betAmount").innerHTML = `Your bet: ${player.bet}`;
+    }
+}
+
+
+// function startingBet() {
+//     // document.getElementById("dealer").innerHTML = ("Place your bets!")
+//     // document.getElementById("wallet").innerText = `Bankroll: ${player.bankroll}`;
+//     let bet = prompt("How much would you like to bet?");
+//     if (bet > player.bankroll) {
+//         alert("You don't have that much money!");
+//         startingBet();
+//     } else if (bet < 1) {
+//         alert("You must bet at least $1!");
+//         startingBet();
+//     } else {
+//         player.bet = bet;
+//         player.bankroll -= bet;
+//         document.getElementById("wallet").innerText = `Bankroll: ${player.bankroll}`;
+//         document.getElementById("bet").innerText = `Bet: ${player.bet}`;
+//     }
+// }
+//Add a "bet" button to my html. When clicked, it will prompt the user for an amount to bet.
+
+//The prompt will be a number between 1 and the player's bankroll.
+
+
+//If the value is outside given parameters, it will message the user and prompt again.
+//If the value is ok, we will subtract it from "bankroll" and add it to "bet".
+//If the user wins, we will add 2x the bet amount to the bankroll.
+//If the user loses, the bankroll remains unchanged.

@@ -9,13 +9,22 @@
     <script defer type="module" src="script.js"></script>
 </head>
 <body>
-    <h1>Blackjack</h1>
     <div id="table">
+        <h1>Blackjack</h1>
         <div id="dealer">
             <div id="dealer-cards"></div>
             <div id="dealer-score"></div>
         </div>
         <div id="win-status">
+        </div>
+        <div id="money">
+            <span id="bankroll">Bankroll: </span>
+            <!-- <span id="bet">Bet: </span>
+            <button id="click-bet">
+                Click to set bet
+            </button> -->
+            <!-- <input type="text" placeholder="Enter your bet here:"> -->
+            <span id="betAmount">Your bet: </span>
         </div>
         <div id="player">
             <div id="player-cards"></div>
@@ -26,6 +35,9 @@
             <button id="stand">Stand</button>
             <button id="deal">Deal</button>
             <button id="reset">New Game</button>
+        </div>
+        <div id="clickStand">
+            <span>After you're done hitting, click "stand" to end your turn and see the results. Click "deal" to let the dealer know that you're ready to start the next hand...just like in a real casino!</span>
         </div>
     </div>
 </body>
